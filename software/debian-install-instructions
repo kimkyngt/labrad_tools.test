@@ -1,0 +1,151 @@
+# download debian iso/install
+
+# write iso to usb drive
+>> sudo dd if=<path to iso> of=<path to usb drive> bs=1M
+>> sync
+
+path to usb drive is something like /dev/sdX. Be very careful to type in the correct path.
+
+
+# add self to sudoers file
+logged in as root,
+make sure sudo is installed
+>> apt-get install sudo
+
+add self to sudoers file
+>> usermod -aG sudo USERNAME
+#We needed to restart the computer before this change
+#took effect
+
+you can now log in as USERNAME
+install some python stuff,
+>> sudo apt-get install python-dev
+>> sudo apt-get install python-pip
+>> sudo apt-get install git
+
+>> sudo pip install pylabrad
+>> sudo pip install ipython
+#Open ipython2 and try importing labrad
+#I got a warning message when importing labrad, so i installed:
+>> sudo pip2 install service_identity 
+
+also required for pylabrad on debian:
+pip install --upgrade pyasn1-modules 
+
+
+add following to /home/<username>/.bash_profile
+    export LABRADHOST=host_name_goes_here
+    export LABRADNODE=node_name_goes_here
+    export LABRADPASSWORD=password_goes_here
+    export LABRAD_TLS=off
+    export PYTHONPATH="home/srgang/SrE/labrad_tools"
+Some distros dont source .bash_profile by default.  If necessary, add:
+source ~/.bash_profile
+to the end of the .bashrc file
+
+
+#Get the Sr 1 version of Ross's labrad code
+from the home directory:  git clone https://github.com/PickyPointer/SrE
+edit files in ~/SrE/labrad_tools/systemd adding username, password, hostname, etc...
+place contents of labrad_tools/systemd in /usr/lib/systemd/system/
+
+#mount the z drive
+[mounting samba share]
+sudo apt-get install cifs-utils
+
+add following line to /etc/fstab
+//yedata.colorado.edu/Sr /home/srgang/yedata cifs credentials=/home/srgang/.yesrdata_credentials,uid=1000,gid=10 0 0
+
+and place following in credentials:
+username=
+password=
+
+Then run: sudo mount -a
+Now we will have access to the z drive
+
+
+if this system is going to tun the labrad manager, (only one computer on the Sesame Street network, download scalabrad and scalabrad-web from bintray)
+scalabrad github: https://github.com/labrad/scalabrad
+scalabrad-web github
+
+enable systemd services:
+sudo systemctl enable labrad-node
+
+if manager, 
+sudo systemctl enable labrad-manager
+sudo systemctl enable labrad-web
+
+reboot or start these services (sudo systemctl start ...)
+
+If you have issues with the current version of labrad, an old version used on yesr10 and yeelmo is located at ~/yedata/SrE/software.  Copy and untar these versions locally.  Depending on where you place these folders you may need to edit the path information in /etc/systemd/system/labrad-manager.service and /etc/systemd/system/labrad-web.service
+
+
+
+[useful packages]
+sudo pip install pyvisa
+sudo pip install pyvisa-py
+
+# pyserial
+sudo apt-get remove --purge brltty
+sudo usermod -aG dialout USERNAME
+#We needed to restart the computer before we could control 
+#serial devices in the dialout group
+sudo pip install pyserial==2.7  
+#Ross's serial_server code requires this specific version of pyserial
+
+
+# linux-gpib. Jump to END LINUX GPIB if you do not want
+sudo apt-get install python-dev
+
+download source from sourceforge.
+either:
+sudo apt-get install linux-headers-$(uname -r)
+sudo apt-get install build-essential
+./configure
+make 
+sudo make install
+or compile your own kernel:
+# apt-get install build-essential fakeroot
+# apt-get build-dep linux
+# apt-get install linux-source
+$ tar xaf /usr/src/linux-source-4.X.tar.xz
+$ cd linux-source-4.X
+$ make oldconfig
+$ scripts/config --disable DEBUG_INFO
+$ make clean
+$ make deb-pkg 
+... go home, grab a beer ...
+# dpkg -i ../linux-image-X.deb
+# dpkg -i ../linux-headers-X.deb
+# dpkg -i ../linux-libc-X.debA
+# reboot now
+cd linux-gpib/
+./configure --with-linux-srcdir=/absolute_path_to_kernel_dir/
+make 
+sudo make install
+
+edit /etc/gpib.conf as necessary.
+ldconfig
+modprobe tnt4882
+reboot?
+sudo gpib_config
+sudo usermod -aG gpib USERNAME
+# END LINUX GPIB
+
+
+
+# opal kelly
+download Ubuntu Frontpanel from Opalkelley website
+extract and run ./install.sh
+copy API/Python /usr/local/lib/python2.7/dist-packages/ok/
+
+# picoscope
+sudo bash -c 'echo "deb https://labs.picotech.com/debian/ picoscope main" >/etc/apt/sources.list.d/picoscope.list'
+wget -O - https://labs.picotech.com/debian/dists/picoscope/Release.gpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install picoscope
+sudo apt-get install libps3000a
+sudo pip2 install picoscope
+
+
+

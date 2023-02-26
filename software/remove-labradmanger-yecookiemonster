@@ -1,0 +1,24 @@
+As of 8/11/17, we are moving the labrad manager from yecookiemonster(ubuntu) to yeelmo (debian)
+
+Here's what I did:
+
+First, stop the node and manager on yecookiemonster:
+
+sudo systemctl stop labrad-node
+sudo systemctl stop labrad-web
+sudo systemctl stop labrad-manager
+
+Disable start at bootup (leave labrad-node enabled):
+
+sudo systemctl disable labrad-web
+sudo systemctl disable labrad-manger
+
+Reconfigure labrad-node on yecookiemonster to use yeelmo's IP on the Sesame Street network (192.168.1.8) for the labradhost:
+
+sudo gedit /etc/systemd/system/labrad-node.service.d
+
+Change line 2 to:
+Environment="LABRADHOST=192.168.1.8"
+
+Restart the labrad node:
+sudo systemctl start labrad-node

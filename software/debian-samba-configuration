@@ -1,0 +1,7 @@
+#Install samba on yeelmo
+sudo apt-get install samba
+
+#Create username 
+smbpasswd -a srgang
+#enter new password
+New SMB password:698gang!
