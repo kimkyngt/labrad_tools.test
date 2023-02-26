@@ -1,0 +1,1 @@
+Function reference for the PicoscopeServer class.  Complete this later!
