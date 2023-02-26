@@ -15,19 +15,21 @@ Change udev rules. For the picscope I have, `ATTRS{idVendor}=="0x0ce9", ATTRS{id
 `. This setting might not be necessary since we will read the serial number of the scope. 
 
 ```
-sudo systemctl enable labrad-manager
-sudo systemctl enable labrad-node
+sudo systemctl enable labrad-manager.service
+sudo systemctl enable labrad-node.service
+sudo systemctl enable labrad-web.service
+
 ```
+Install `scalabrad-web`.
+
+Install lab modified version of `ps3000a.py`
+In this case, the path is `/usr/local/lib/python3.10/dist-packages/picoscope`
+
 
 ## TODO
 
-- [ ] modified `ps3000a.py`?
-- [ ] `labrad-manager.service` does not work...
-
-
 ## Notes
 - Installing `.tar.gz` files : `tar xzvf <file>`
-- Skipped installing `labrad-web`
 
 ## Environment
 - Lenovo ThinkCentre M70q Gen 2

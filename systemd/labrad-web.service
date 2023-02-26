@@ -6,8 +6,8 @@ After=syslog.target
 Type=simple
 User=srgang
 Group=srgang
-WorkingDirectory=/home/srgang/scalabrad/scalabrad-web-server-2.0.5/
-ExecStart=/home/srgang/scalabrad/scalabrad-web-server-2.0.5/bin/labrad-web --host 0.0.0.0
+WorkingDirectory=/home/srgang/scalabrad-web-server-2.0.6/
+ExecStart=/home/srgang/scalabrad-web-server-2.0.6/bin/labrad-web --host 0.0.0.0
 StandardOutput=syslog
 StandardError=syslog
 
