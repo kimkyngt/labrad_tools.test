@@ -22,6 +22,8 @@ sudo systemctl enable labrad-node
 ## TODO
 
 - [ ] modified `ps3000a.py`?
+- [ ] `labrad-manager.service` does not work...
+
 
 ## Notes
 - Installing `.tar.gz` files : `tar xzvf <file>`
