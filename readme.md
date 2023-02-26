@@ -1,11 +1,13 @@
-# Testing labrad_tools on separate system. 
+# Labrad_tools.test
+
+To understand how to set up `labrad_tools`. 
 
 ## Log
 Installing labrad manager. Use [scalalabrad](https://github.com/labrad/scalabrad)
 
 I had to install Java8 to set `JAVA_HOME`.
 
-Configuring node following [wiki](https://github.com/PickyPointer/SrE/wiki/Configuring-Labrad-Nodes) from Eric. Cloned it on this repository (`copy_SrE.wiki/`).  
+Configuring node following [wiki](https://github.com/PickyPointer/SrE/wiki/Configuring-Labrad-Nodes) from Eric. Cloned it on this repository (`copy_SrE.wiki/`).
 
 
 ## TODO
