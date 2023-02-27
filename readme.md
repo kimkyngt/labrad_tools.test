@@ -21,6 +21,10 @@ sudo systemctl enable labrad-web.service
 
 ```
 Install `scalabrad-web`.
+Following is required for autostart. `sudo visudo -f /etc/sudoers`
+```
+Defaults env_keep += "PYTHONPATH LABRADHOST LABRADNODE LABRADPASSWORD LABRAD_TLS"
+```
 
 Install lab modified version of `ps3000a.py`
 In this case, the path is `/usr/local/lib/python3.10/dist-packages/picoscope`
