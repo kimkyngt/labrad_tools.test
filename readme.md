@@ -33,9 +33,18 @@ sudo systemctl status labrad-manager.service
 ```
 This can show what's wrong.
 
-
 Install lab modified version of `ps3000a.py`
 In this case, the path is `/usr/local/lib/python3.10/dist-packages/picoscope`
+Change udev rule for the picoscope, following Eric's instructions. 
+Using `sudo gedit /etc/udev/rules.d/95-pico.rules`, we add following instruction.
+```
+ATTRS{idVendor}=="0ce9", ATTRS{idProduct}=="1213", MODE="664", GROUP="pico", SYMLINK+="picoscope3403D"
+```
+Also, change the permission of the picoscope.
+```
+sudo chmod a+rwx /dev/picoscope3403D 
+```
+
 
 
 ## TODO
@@ -47,5 +56,5 @@ In this case, the path is `/usr/local/lib/python3.10/dist-packages/picoscope`
 - Lenovo ThinkCentre M70q Gen 2
 - Ubuntu 22.04.2 LTS
 - python 3.10
-- 
+- Picoscope 3403D
 

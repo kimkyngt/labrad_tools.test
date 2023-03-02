@@ -1,4 +1,5 @@
 import traceback
+import labrad
 
 from twisted.internet import defer, reactor, threads
 from twisted.internet.defer import inlineCallbacks, returnValue
