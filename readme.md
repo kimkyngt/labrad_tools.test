@@ -25,6 +25,14 @@ Following is required for autostart. `sudo visudo -f /etc/sudoers`
 ```
 Defaults env_keep += "PYTHONPATH LABRADHOST LABRADNODE LABRADPASSWORD LABRAD_TLS"
 ```
+This does not make things work. 
+At the end we added `Environment=JAVA_HOME=/home/srgang/java/jre1.8.0_361` on `[Service]` of `.service` file.
+Useful commands for debugging
+```
+sudo systemctl status labrad-manager.service
+```
+This can show what's wrong.
+
 
 Install lab modified version of `ps3000a.py`
 In this case, the path is `/usr/local/lib/python3.10/dist-packages/picoscope`

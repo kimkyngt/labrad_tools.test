@@ -1,13 +1,14 @@
 [Unit]
 Description=labrad manager
-After=syslog.target
+After=network-online.target
 
 [Service]
+Environment=JAVA_HOME=/home/srgang/java/jre1.8.0_361
 Type=simple
 User=srgang
 Group=srgang
-WorkingDirectory=/home/srgang/scalabrad-0.8.3
-ExecStart=/home/srgang/scalabrad-0.8.3/bin/labrad --tls-required=false --password=698gang!
+WorkingDirectory=/home/srgang/scalabrad-0.8.3/
+ExecStart=/home/srgang/scalabrad-0.8.3/bin/labrad --tls-required=false --password=$LABRADPASSWORD
 StandardOutput=syslog
 StandardError=syslog
 

@@ -3,6 +3,7 @@ Description=labrad manager
 After=syslog.target
 
 [Service]
+Environment=JAVA_HOME=/home/srgang/java/jre1.8.0_361
 Type=simple
 User=srgang
 Group=srgang
