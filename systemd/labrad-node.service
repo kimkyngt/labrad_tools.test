@@ -8,8 +8,6 @@ User=srgang
 Group=srgang
 WorkingDirectory=/home/srgang/labrad_tools.test
 ExecStart=/usr/bin/python3 -m labrad.node
-StandardOutput=syslog
-StandardError=syslog
 
 [Install]
 WantedBy=multi-user.target
