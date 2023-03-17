@@ -28,7 +28,7 @@ class ReceiverWidget(QtWidgets.QWidget):
         # make an asynchronous connection to LabRAD
         from labrad.wrappers import connectAsync
         cxn = yield connectAsync(name='Signal Widget')
-        self.server = cxn.emitter_server
+        self.server = cxn.yesr_sr1_test_emitterserver
         # connect to emitter server
         yield self.server.signal__emitted_signal(self.ID)
         # connect to signal from server (note the method is named from parsed
