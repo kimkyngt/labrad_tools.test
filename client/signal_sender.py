@@ -9,7 +9,7 @@ class ReceiverWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(ReceiverWidget, self).__init__(parent)
         self.setupLayout()
-        # self.connect()
+        self.connect()
 
     def setupLayout(self):
         # setup the layout and make all the widgets
@@ -23,16 +23,16 @@ class ReceiverWidget(QtWidgets.QWidget):
 
         layout.addWidget(self.sendbutton)
         self.setLayout(layout)
-
+        
     def clickme(self):
-        yield self.server.emitSignal()
+        self.server.emit_signal()
         print("press")
 
     @inlineCallbacks
     def connect(self):
         import labrad
-        # cxn = yield labrad.connect()
-        # self.server = yield cxn.yesr_sr1_test_emitterserver
+        cxn = labrad.connect()
+        self.server = yield cxn.yesr_sr1_test_emitterserver
 
 
 if __name__ == '__main__':
